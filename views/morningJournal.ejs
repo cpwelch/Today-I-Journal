@@ -1,0 +1,45 @@
+<%- include('partials/header.ejs'); -%>
+
+<div class="date"><%=day%></div>
+
+<a href="/"><h2>Back Home <i class="fa-solid fa-book"></i></h2></a>
+<a href="/nightJournal"><h2>Night Journal <i class="fa-solid fa-pen-to-square nightLog"></i></h2></a>
+
+
+  
+</html>
+
+
+<div class="morningIntentions">
+    <div class="box">
+     <h1>I commit myself to:</h1>
+     <ul class="lists">
+        <% commits.forEach(function(commit) { %>
+            <li><%= commit %></li> 
+
+            <% }) %>
+            
+         
+     </ul>
+     <form class="" action="/commits" method="post">
+       <input type="text" name="commits" />
+       <button type="submit" name="button">+</button>
+     </form> 
+   </div>
+  
+  
+   <div class="box">
+     <h1>I fuel my body with:</h1>
+     <ul class="lists">
+        <% fuels.forEach(function(fuel) { %>
+             <li><%= fuel %></li> 
+        <%  }) %>
+     </ul>
+     <form class="" action="/fuel" method="post">
+       <input type="text" name="fuel" />
+       <button type="submit" name="button">+</button>
+     </form> 
+   </div>
+  
+   </div>
+  </div>
