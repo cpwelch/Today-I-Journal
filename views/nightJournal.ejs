@@ -14,7 +14,7 @@
     <h1>I am grateful for:</h1>
     <ul class="lists">
       <% grateful.forEach(function(input){ %>
-      <li><%= input.grateful %></li>
+      <li><%= input %></li>
       <% }) %>
     </ul>
     <form class="" action="/grateful" method="post">
@@ -27,7 +27,7 @@
     <h1>I have accomplished:</h1>
     <ul class="lists">
       <% accomplishments.forEach(function(input){ %>
-      <li><%= input.accomplishments %></li>
+      <li><%= input %></li>
       <% }) %>
     </ul>
     <form class="" action="/accomp" method="post">
@@ -41,7 +41,7 @@
 
     <ul class="lists">
       <% enjoyed.forEach(function(input){ %>
-      <li><%= input.enjoyed %></li>
+      <li><%= input %></li>
       <% }) %>
     </ul>
     <form class="" action="/enjoyed" method="post">

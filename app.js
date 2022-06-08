@@ -6,14 +6,15 @@ const date = require(__dirname + "/date.js");
 
 const app = express();
 
-// let grateful = ["Family", "Waking up in a beautiful place"];
-// let accomplishments = ["nothing"];
-// let mostEnjoyed = "";
+let grateful = [""];
+let accomplishments = [""];
+let mostEnjoyed = [""];
 
 let commits = [""];
 let fuels = [""];
 
 const mongoose = require("mongoose");
+const res = require("express/lib/response");
 
 const database = (module.exports = () => {
   const connectionParams = {
@@ -35,12 +36,12 @@ const database = (module.exports = () => {
 database();
 
 const dateJournalSchema = new mongoose.Schema({
-  date: { type: Date, default: Date.now },
+  date: { type: Date, default: Date },
   commitments: String,
   fuels: String,
-  grateful: String,
-  accomplishments: String,
-  enjoyed: String,
+  grateful: Array,
+  accomplishments: Array,
+  enjoyed: Array,
 });
 
 const journalDate = mongoose.model("Date", dateJournalSchema);
@@ -52,9 +53,21 @@ app.use(express.static("public"));
 
 app.get("/", function (req, res) {
   let day = date.getDate();
-  res.render("home", {
-    day: day,
-  });
+
+  journalDate
+    .find()
+    .then((a) => {
+      res.render("home", {
+        day: day,
+        date: a,
+        grateful: a,
+        accomplishments: a,
+        enjoyed: a,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 //MORNING JOURNAL
@@ -87,46 +100,58 @@ app.post("/fuel", function (req, res) {
 app.get("/nightJournal", function (req, res) {
   let day = date.getDate();
 
-  journalDate
-    .find()
-    .then((a) => {
-      res.render("nightJournal", {
-        day: day,
-        grateful: a,
-        accomplishments: a,
-        enjoyed: a,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  res.render("nightJournal", {
+    day: day,
+    grateful: grateful,
+    accomplishments: accomplishments,
+    enjoyed: mostEnjoyed,
+  });
 });
 
 app.post("/grateful", function (req, res) {
   const gratefulFor = req.body.grateful;
-  const grateful = new journalDate({
-    grateful: gratefulFor,
-  });
-  grateful.save();
+  grateful.push(gratefulFor);
   res.redirect("/nightJournal");
 });
 
 app.post("/accomp", function (req, res) {
   const accomplished = req.body.accomplishments;
-  const accomplishments = new journalDate({
-    accomplishments: accomplished,
-  });
-  accomplishments.save();
+  accomplishments.push(accomplished);
   res.redirect("/nightJournal");
 });
 
 app.post("/enjoyed", function (req, res) {
-  const mostEnjoyed = req.body.enjoyed;
-  const enjoyed = new journalDate({
+  const enjoyed = req.body.enjoyed;
+  mostEnjoyed.push(enjoyed);
+
+  const journal = new journalDate({
+    grateful: grateful,
+    accomplishments: accomplishments,
     enjoyed: mostEnjoyed,
   });
-  enjoyed.save();
-  res.redirect("/nightJournal");
+
+  journal.save();
+
+  res.redirect("/");
+});
+
+app.get("/journal/:journalEntry", function (req, res) {
+  const journalEntry = req.params.journalEntry;
+
+  journalDate.findOne({ date: journalEntry }, function (err, foundEntry) {
+    if (!err) {
+      if (!foundEntry) {
+        console.log("Doesn't exist");
+      } else {
+        res.render("journal", {
+          title: foundEntry.date.toString().slice(0, 15),
+          grateful: foundEntry.grateful,
+          accomplishments: foundEntry.accomplishments,
+          enjoyed: foundEntry.enjoyed,
+        });
+      }
+    }
+  });
 });
 
 app.listen(3000, function () {

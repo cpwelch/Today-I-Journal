@@ -1,0 +1,33 @@
+<%- include('partials/header'); -%>
+
+<h1 id="journalDate"><%=title%></h1>
+
+<a href="/"
+  ><h2>Back Home <i class="fa-solid fa-book"></i></h2
+></a>
+<br>
+
+
+
+<h2>Morning Intentions:</h2>
+
+<h2>Night Journal:</h2>
+<ul>
+    <h3>I am grateful for:</h3>
+<% grateful.forEach(function(input){ %>
+    <li class="li"><%= input %></li>
+    <% }) %>
+    <br>
+    <h3>I accomplished:</h3>
+    <% accomplishments.forEach(function(input){ %>
+        <li class="li"><%= input %></li>
+        <% }) %>
+        <br>
+        <h3>I enjoyed the most:</h3>
+        <% enjoyed.forEach(function(input){ %>
+            <li class="li"><%= input %></li>
+            <% }) %>
+        </ul>
+        <br><br>
+
+</html>

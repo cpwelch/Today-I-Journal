@@ -8,6 +8,7 @@
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
+  list-style-type: none;
 }
 
 header {
@@ -43,9 +44,44 @@ body {
   letter-spacing: 2px;
 }
 
+#journalDate {
+  margin-top: 2.5vh;
+  margin-left: 5vw;
+  font-family: Charrington;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: black;
+}
+
 h2 {
   margin-top: 2.5vh;
   margin-left: 5vw;
+  font-family: Charrington;
+  text-transform: uppercase;
+  font-size: larger;
+  letter-spacing: 2px;
+  color: black;
+}
+
+h3 {
+  margin-top: 2.5vh;
+  margin-left: 10vw;
+  font-family: Charrington;
+  text-transform: uppercase;
+  font-size: large;
+  letter-spacing: 2px;
+  color: black;
+}
+
+.li {
+  margin-top: 2.5vh;
+  margin-left: 12.5vw;
+  font-family: Charrington;
+}
+
+.journalEntry {
+  margin-top: 5vh;
+  margin-left: 10vw;
   font-family: Charrington;
   text-transform: uppercase;
   font-size: larger;
