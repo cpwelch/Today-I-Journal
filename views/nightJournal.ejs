@@ -3,15 +3,16 @@
 <div class="date"><%=day%></div>
 
 <a href="/"
-  ><h2>Back Home <i class="fa-solid fa-book"></i></h2
+  ><h2>Back Home <i class="fa-solid fa-house"></i></h2
 ></a>
-<a href="/morningJournal"
-  ><h2>Morning Journal <i class="fa-solid fa-pen-to-square nightLog"></i></h2
+<a href="/myJournals"
+  ><h2>
+    View Journal Entries <i class="fa-solid fa-pen-to-square nightLog"></i></h2
 ></a>
 
 <div class="nightJournal">
   <div class="box">
-    <h1>I am grateful for:</h1>
+    <h1 id="grateful">I am grateful for:</h1>
     <ul class="lists">
       <% grateful.forEach(function(input){ %>
       <li><%= input %></li>
@@ -24,7 +25,7 @@
   </div>
 
   <div class="box">
-    <h1>I have accomplished:</h1>
+    <h1 id="accomplished">I have accomplished:</h1>
     <ul class="lists">
       <% accomplishments.forEach(function(input){ %>
       <li><%= input %></li>
@@ -37,16 +38,34 @@
   </div>
 
   <div class="box">
-    <h1>I enjoyed the most:</h1>
+    <h1 id="enjoyed">I enjoyed the most:</h1>
 
     <ul class="lists">
       <% enjoyed.forEach(function(input){ %>
       <li><%= input %></li>
       <% }) %>
     </ul>
-    <form class="" action="/enjoyed" method="post">
-      <textarea name="enjoyed" cols="30" rows="10"></textarea>
+    <form " action="/enjoyed" method="post">
+      <input type="text" name="enjoyed" />
       <button type="submit" name="button">+</button>
     </form>
   </div>
+
+  <div class="box">
+    <h1 id="tomorrow">Tomorrow I commit myself to:</h1>
+
+    <ul class="lists">
+      <% commitments.forEach(function(input){ %>
+      <li><%= input %></li>
+      <% }) %>
+    </ul>
+    <form class="" action="/commit" method="post">
+      <input type="text" name="commitments" />
+      <button type="submit" name="button">+</button>
+    </form>
+  </div>
+
+  <form class="" action="/submitJournal" method="post">
+    <button id="submitButton" type="submit" name="button">Save</button>
+  </form>
 </div>

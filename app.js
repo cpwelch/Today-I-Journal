@@ -9,9 +9,7 @@ const app = express();
 let grateful = [""];
 let accomplishments = [""];
 let mostEnjoyed = [""];
-
 let commits = [""];
-let fuels = [""];
 
 const mongoose = require("mongoose");
 const res = require("express/lib/response");
@@ -36,12 +34,11 @@ const database = (module.exports = () => {
 database();
 
 const dateJournalSchema = new mongoose.Schema({
-  date: { type: Date, default: Date },
-  commitments: String,
-  fuels: String,
+  date: { type: Date, default: date.getDate() },
   grateful: Array,
   accomplishments: Array,
   enjoyed: Array,
+  commitments: Array,
 });
 
 const journalDate = mongoose.model("Date", dateJournalSchema);
@@ -54,45 +51,30 @@ app.use(express.static("public"));
 app.get("/", function (req, res) {
   let day = date.getDate();
 
+  res.render("home", {
+    day: day,
+  });
+});
+
+app.get("/login", function (req, res) {
+  res.render("login", {});
+});
+
+app.get("/register", function (req, res) {
+  res.render("register", {});
+});
+
+app.get("/myJournals", function (req, res) {
   journalDate
     .find()
     .then((a) => {
-      res.render("home", {
-        day: day,
+      res.render("myJournals", {
         date: a,
-        grateful: a,
-        accomplishments: a,
-        enjoyed: a,
       });
     })
     .catch((err) => {
       console.log(err);
     });
-});
-
-//MORNING JOURNAL
-
-app.get("/morningJournal", function (req, res) {
-  let day = date.getDate();
-  res.render("morningJournal", {
-    day: day,
-    commits: commits,
-    fuels: fuels,
-  });
-});
-
-app.post("/commits", function (req, res) {
-  let commitments = req.body.commits;
-  commits.push(commitments);
-
-  res.redirect("/morningJournal");
-});
-
-app.post("/fuel", function (req, res) {
-  let fueling = req.body.fuel;
-  fuels.push(fueling);
-
-  res.redirect("/morningJournal");
 });
 
 //NIGHTJOURNAL
@@ -105,6 +87,7 @@ app.get("/nightJournal", function (req, res) {
     grateful: grateful,
     accomplishments: accomplishments,
     enjoyed: mostEnjoyed,
+    commitments: commits,
   });
 });
 
@@ -117,22 +100,31 @@ app.post("/grateful", function (req, res) {
 app.post("/accomp", function (req, res) {
   const accomplished = req.body.accomplishments;
   accomplishments.push(accomplished);
-  res.redirect("/nightJournal");
+  res.redirect("/nightJournal#grateful");
 });
 
 app.post("/enjoyed", function (req, res) {
   const enjoyed = req.body.enjoyed;
   mostEnjoyed.push(enjoyed);
+  res.redirect("/nightJournal#accomplished");
+});
 
+app.post("/commit", function (req, res) {
+  const commit = req.body.commitments;
+  commits.push(commit);
+  res.redirect("/nightJournal#enjoyed");
+});
+
+app.post("/submitJournal", function (req, res) {
   const journal = new journalDate({
     grateful: grateful,
     accomplishments: accomplishments,
     enjoyed: mostEnjoyed,
+    commitments: commits,
   });
 
   journal.save();
-
-  res.redirect("/");
+  res.redirect("/myJournals");
 });
 
 app.get("/journal/:journalEntry", function (req, res) {
@@ -145,6 +137,8 @@ app.get("/journal/:journalEntry", function (req, res) {
       } else {
         res.render("journal", {
           title: foundEntry.date.toString().slice(0, 15),
+          commitments: foundEntry.commitments,
+          fuels: foundEntry.fuels,
           grateful: foundEntry.grateful,
           accomplishments: foundEntry.accomplishments,
           enjoyed: foundEntry.enjoyed,

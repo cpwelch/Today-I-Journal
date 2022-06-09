@@ -1,0 +1,13 @@
+<%- include('partials/header'); -%>
+
+<h1 class="pageTitle">Journal Entries:</h1>
+
+<a href="/"
+  ><h2>Back Home <i class="fa-solid fa-house"></i></h2
+></a>
+
+<% date.forEach(function(input){ %>
+<a href="/journal/<%=input.date%>"
+  ><h2 class="journalEntry"><%= input.date.toString().slice(0,15) %></h2></a
+>
+<% }) %>

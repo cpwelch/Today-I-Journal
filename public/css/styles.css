@@ -23,6 +23,45 @@ header {
   width: 10rem;
 }
 
+.loginBody {
+  background-color: #7ed3b2;
+  width: 100vw;
+  height: 85vh;
+  text-align: center;
+}
+
+.loginBody p {
+  color: black;
+  font-family: Charrington;
+  text-decoration: underline;
+  text-align: center;
+}
+
+.loginForm {
+  padding-top: 5vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5vh;
+  margin-bottom: 5vh;
+}
+
+.loginForm input {
+  padding: 15px;
+  width: 18vw;
+  border: none;
+  background-color: #f2f2f2;
+  border-radius: 5rem;
+  font-family: Charrington;
+}
+
+.loginForm button {
+  padding: 5px;
+  width: 18vw;
+  font-size: 1.5rem;
+}
+
 body {
   background-color: #f2f2f2;
 }
@@ -96,6 +135,15 @@ h1 {
   letter-spacing: 2px;
 }
 
+.pageTitle {
+  font-family: Charrington;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 2.5vh;
+  margin-bottom: 5vh;
+  margin-left: 5vw;
+}
+
 .lists {
   text-align: left;
   margin-top: 2.5vh;
@@ -144,15 +192,18 @@ button {
   font-size: 2rem;
 }
 
-textarea {
-  padding: 5px 5px;
-  position: inline;
-  max-width: 18vw;
-  max-height: 10vh;
+#submitButton {
+  width: 12.75rem;
+  height: 2.75rem;
+  margin-left: 1vw;
+  background-color: #ef6c57;
+  color: white;
   border: none;
-  background-color: #ef6b5745;
-  border-radius: 0.5rem;
+  border-radius: 5rem;
+  cursor: pointer;
   font-family: Charrington;
+  font-size: 2rem;
+  margin-bottom: 10vh;
 }
 
 form {

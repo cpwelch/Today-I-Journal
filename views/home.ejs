@@ -2,12 +2,11 @@
 
 <div class="date"><%=day%></div>
 
-<a href="/morningJournal"><h2>Set Morning Intentions <i class="fa-solid fa-pen-to-square morningLog"></i></h2></a>
-<a href="/nightJournal"><h2>Night Journal <i class="fa-solid fa-pen-to-square nightLog"></i></h2></a>
+<a href="/nightJournal"><h2>Write Journal <i class="fa-solid fa-pen-to-square nightLog"></i></h2></a>
+<a href="/myJournals"><h2>View journal entries <i class="fa-solid fa-book"></i></h2></a>
 
- <% date.forEach(function(input){ %>
-    <a href="/journal/<%=input.date%>"><h2 class="journalEntry"><%= input.date.toString().slice(0,15) %></h2></a>
-    <% }) %>
+
+
 
   
 </html>
