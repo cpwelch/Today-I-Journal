@@ -2,7 +2,7 @@
 
 <h1 id="journalDate"><%=title%></h1>
 
-<a href="/"
+<a href="/home"
   ><h2>Back Home <i class="fa-solid fa-house"></i></h2
 ></a>
 <a href="/myJournals"
@@ -24,6 +24,11 @@
         <br>
         <h3>I enjoyed the most:</h3>
         <% enjoyed.forEach(function(input){ %>
+            <li class="li"><%= input %></li>
+            <% }) %>
+        <br>
+        <h3>Tomorrow I commit myself to:</h3>
+        <% commitments.forEach(function(input){ %>
             <li class="li"><%= input %></li>
             <% }) %>
         </ul>

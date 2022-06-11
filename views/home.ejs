@@ -1,6 +1,8 @@
 <%- include('partials/header.ejs'); -%>
 
-<div class="date"><%=day%></div>
+<div class="userPanel"><%=day%>
+    <a href="/logout"><button id ="logoutBtn" >Log out</button></a>
+</div>
 
 <a href="/nightJournal"><h2>Write Journal <i class="fa-solid fa-pen-to-square nightLog"></i></h2></a>
 <a href="/myJournals"><h2>View journal entries <i class="fa-solid fa-book"></i></h2></a>

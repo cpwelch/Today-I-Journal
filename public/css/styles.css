@@ -213,6 +213,28 @@ form {
   flex-direction: row;
 }
 
+.userPanel {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2.5vh;
+  margin-bottom: 5vh;
+  margin-left: 5vw;
+  font-family: Charrington;
+  text-transform: uppercase;
+  font-size: larger;
+  letter-spacing: 2px;
+}
+
+#logoutBtn {
+  padding: 5px;
+  width: 10vw;
+  font-size: 1.5rem;
+  margin-right: 4vw;
+  background-color: rgb(57, 57, 57);
+}
+
 .hidden {
   display: none;
 }
